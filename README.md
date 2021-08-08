@@ -8,7 +8,7 @@ Before you continue, ensure you meet the following requirements:
 - You have install the Universal Forwarder on Linux
 - The Splunk Server
 
-### Install Universal Forwarder on Linux
+## Install Universal Forwarder on Linux
 
 - The universal forwarder is available for Linux as a tar file, an RPM package, and a DEB package.
 - In my case, I install from a tar file.
@@ -18,7 +18,7 @@ Before you continue, ensure you meet the following requirements:
 tar xvzf splunkforwarder-<…>-Linux-x86_64.tgz -C /opt
 ```
 
-### Install EDR Server
+## Install EDR Server
 - Download source code from github https://github.com/jinjimosd/Lugia.git
 - Create directory configs and file edrserver.conf
 - Run install.sh file as sudo
@@ -46,7 +46,7 @@ vim configs/edrserver.conf
 chmod +x install.sh
 sudo ./install.sh
 ```
-### Configure Universal Forwarder on Linux
+## Configure Universal Forwarder on Linux
 - Configure the universal forwarder to send data to the Splunk Enterprise indexer 
 
 - From a shell prompt on the universal forwarder, go to the */opt/splunkforwarder/bin* directory.
@@ -79,14 +79,14 @@ vim /opt/splunkforwarder/etc/system/local/deploymentclient.conf
 [target-broker:deploymentServer]
 targetUri = <host>:<port>
 ```
-- Start Splunk Forwarder
-```
-sudo /opt/splunkforwarder/bin/splunk start
-```
 
 ### Start server
 ```
 sudo systemctl start lugia.services
+```
+### Start Splunk Forwarder
+```
+sudo /opt/splunkforwarder/bin/splunk start
 ```
 
 ### Installing EDR agent.

@@ -1,0 +1,29 @@
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen tcp 192.168.100.12:1234: bind: The requested address is not valid in its context.","time":"2021-08-01T16:40:58+07:00"}
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen tcp 192.168.100.12:1234: bind: The requested address is not valid in its context.","time":"2021-08-01T16:41:12+07:00"}
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen tcp 192.168.100.12:1234: bind: The requested address is not valid in its context.","time":"2021-08-01T16:41:15+07:00"}
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen tcp 192.168.100.12:1234: bind: The requested address is not valid in its context.","time":"2021-08-01T16:41:16+07:00"}
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen tcp 192.168.100.12:1234: bind: The requested address is not valid in its context.","time":"2021-08-01T16:41:19+07:00"}
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen TCP: unknown network TCP","time":"2021-08-01T19:30:04+07:00"}
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen tcp 192.168.100.12:1234: bind: The requested address is not valid in its context.","time":"2021-08-03T00:43:27+07:00"}
+{"Hostname":"SPRINGSCHOOL","level":"info","msg":"listen tcp 192.168.100.12:1234: bind: The requested address is not valid in its context.","time":"2021-08-03T00:43:45+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T22:03:14+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T22:03:14+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T22:44:40+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T22:44:40+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T23:17:41+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T23:17:41+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T23:28:46+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T23:28:46+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T23:31:25+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T23:31:25+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T23:33:44+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T23:33:44+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T23:35:43+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T23:35:43+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-06T23:37:44+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-06T23:37:44+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp 10.8.0.3:1234: i/o timeout\"","time":"2021-08-07T00:03:05+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-07T00:03:05+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-07T00:29:14+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-07T00:30:20+07:00"}
+{"Hostname":"truongblx","level":"info","msg":"\u003cnil\u003e","time":"2021-08-07T00:32:18+07:00"}
