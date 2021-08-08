@@ -89,7 +89,7 @@ sudo systemctl start lugia.services
 sudo /opt/splunkforwarder/bin/splunk start
 ```
 
-### Installing EDR agent.
+# Installing EDR agent.
 - Download source code from github https://github.com/jinjimosd/Lugia.git
 - Create windowsagent.conf and add config.
 

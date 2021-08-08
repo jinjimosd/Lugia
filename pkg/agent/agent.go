@@ -158,7 +158,7 @@ func (*AgentGRPCService) ManagerEventCode1(
 	// Handle the EventCode 1 based on action variable
 	switch action {
 	// In this case, the agent kills the Process Tree.
-	case "kill tree":
+	case "killtree":
 		if err := KillTreeProcess(pid32); err != nil {
 			resultInfo = "Error kills tree ProcessId " + pid + ": " + err.Error()
 			result = false
@@ -215,7 +215,7 @@ func (*AgentGRPCService) ManagerEventCode3(
 	// Handle the EventCode 3 based on action variable
 	switch action {
 	// In this case, the agent kills the Process Tree.
-	case "kill tree":
+	case "killtree":
 		if err := KillTreeProcess(pid32); err != nil {
 			resultInfo = "Error kills tree ProcessId " + pid + ": " + err.Error()
 			result = false
@@ -281,7 +281,7 @@ func (*AgentGRPCService) ManagerEventCode7(
 	// Handle the EventCode 7 based on action variable
 	switch action {
 	// In this case, the agent kills the Process Tree.
-	case "kill tree":
+	case "killtree":
 		if err := KillTreeProcess(pid32); err != nil {
 			resultInfo = "Error kills tree ProcessId " + pid + ": " + err.Error()
 			result = false
@@ -334,7 +334,7 @@ func (*AgentGRPCService) ManagerEventCode8(
 	// Handle the EventCode 8 based on action variable
 	switch action {
 	// In this case, the agent kills the Source Process Tree.
-	case "kill tree":
+	case "killtree":
 		if err := KillTreeProcess(pid32); err != nil {
 			resultInfo = "Error kills tree ProcessId " + pid + ": " + err.Error()
 			result = false
@@ -379,7 +379,7 @@ func (*AgentGRPCService) ManagerEventCode9(
 	// Handle the EventCode 9 based on action variable
 	switch action {
 	// In this case, the agent kills the Process Tree.
-	case "kill tree":
+	case "killtree":
 		if err := KillTreeProcess(pid32); err != nil {
 			resultInfo = "Error kills tree ProcessId " + pid + ": " + err.Error()
 			result = false
@@ -424,7 +424,7 @@ func (*AgentGRPCService) ManagerEventCode10(
 	// Handle the EventCode 10 based on action variable
 	switch action {
 	// In this case, the agent kills the Process Tree.
-	case "kill tree":
+	case "killtree":
 		if err := KillTreeProcess(pid32); err != nil {
 			resultInfo = "Error kills tree ProcessId " + pid + ": " + err.Error()
 			result = false
@@ -468,7 +468,7 @@ func (*AgentGRPCService) ManagerEventCode11(
 	// Handle the EventCode 11 based on action variable
 	switch action {
 	// In this case, the agent deletes the newly created file
-	case "detele":
+	case "delete":
 		if err := os.Remove(filePath); err != nil {
 			resultInfo = "Error deletes file " + filePath + ": " + err.Error()
 			result = false

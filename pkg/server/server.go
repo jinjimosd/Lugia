@@ -220,7 +220,7 @@ func StartServer() {
 			WriteAppLogError(err)
 			os.Exit(1)
 		}
-		WriteAppLogInfo("New connection from " + conn.RemoteAddr().String())
+
 		host, _, _ := net.SplitHostPort(conn.RemoteAddr().String())
 
 		// check if host equal splunk host, pass conn to HandleSplunkConn
@@ -307,7 +307,7 @@ func HandleWindowsConn(conn net.Conn) {
 		mapClientConns[computerName] = agentConn
 		WriteAppLogInfo("Success creates dial client connection to " + agentAddress)
 	}
-	WriteAppLogInfo("Close connection from " + conn.RemoteAddr().String())
+
 	conn.Close()
 }
 
@@ -330,7 +330,6 @@ func HandleSplunkConn(conn net.Conn) {
 			if err := HandleRule(logMapInterface); err != nil {
 				WriteAppLogError(err)
 			}
-			WriteAppLogInfo("Close connection from " + conn.RemoteAddr().String())
 			conn.Close()
 			break
 		}
@@ -338,37 +337,21 @@ func HandleSplunkConn(conn net.Conn) {
 		// convert string json to map string
 		logMapString := ConvertInterfaceToString(logMapInterface)
 		computerName := logMapString["ComputerName"]
+		connRequest := mapClientConns[computerName]
 
 		// if the key "action" exists, this log is sent by the administrator.
 		if _, ok := logMapString["Action"]; ok {
 
-			// if the key computerName does not exists, can not connect to agent
-			if _, ok := mapClientConns[computerName]; !ok {
-				errMsg := "Connection to agent " + computerName + " does not exist"
-				WriteAppLogError(errMsg)
-			} else {
-				// GRPC Connection has a key in the Map equal to the
-				// ComputerName of the received message
-				connRequest := mapClientConns[computerName]
-				HandleRespone(connRequest, logMapString)
-			}
-			WriteAppLogInfo("Close connection from " + conn.RemoteAddr().String())
+			// GRPC Connection has a key in the Map equal to the
+			// ComputerName of the received message
+			connRequest := mapClientConns[computerName]
+			HandleRespone(connRequest, logMapString)
+
 			conn.Close()
 			break
 
 			//If not, compare the rule
 		} else {
-
-			// if the key computerName does not exists, can not connect to agent
-			if _, ok := mapClientConns[computerName]; !ok {
-				errMsg := "Connection to agent " + computerName + " does not exist"
-				WriteAppLogError(errMsg)
-				continue
-			}
-
-			// GRPC Connection has a key in the Map equal to the
-			// ComputerName of the received message
-			connRequest := mapClientConns[computerName]
 
 			//the slice log after filtering rules
 			objRequests := FilterRulesLog(logMapString)
@@ -439,7 +422,7 @@ func HandleRule(ruleSent map[string]interface{}) error {
 func HandleRespone(clientConn *grpc.ClientConn, objRequest map[string]string) {
 
 	// send request base on "Action" value
-	if objRequest["Action"] == "get file" { // download file from agent
+	if objRequest["Action"] == "getfile" { // download file from agent
 		err := RequestGetFile(objRequest, clientConn)
 
 		// set "Result", "ResultInfo", "ResultTime" to write result log.
@@ -448,7 +431,6 @@ func HandleRespone(clientConn *grpc.ClientConn, objRequest map[string]string) {
 		if err != nil {
 			objRequest["Result"] = "Fail"
 			objRequest["ResultInfo"] = err.Error()
-			WriteAppLogError(err)
 		} else {
 			objRequest["Result"] = "Success"
 			objRequest["ResultInfo"] = "Download file successfully"
@@ -456,8 +438,6 @@ func HandleRespone(clientConn *grpc.ClientConn, objRequest map[string]string) {
 		objRequest["ResultTime"] = FormatCurrentDateMilisecond()
 		if err := WriteMapString(resultLogPath, objRequest); err != nil {
 			WriteAppLogError(err)
-		} else {
-			WriteAppLogInfo("Success writes new response result to result file")
 		}
 
 		// disable network adapter
@@ -616,7 +596,6 @@ func RequestEventCode1(objRequest map[string]string, conn *grpc.ClientConn) *rpc
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -642,7 +621,6 @@ func RequestEventCode3(objRequest map[string]string, conn *grpc.ClientConn) *rpc
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -665,7 +643,6 @@ func RequestEventCode7(objRequest map[string]string, conn *grpc.ClientConn) *rpc
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -687,7 +664,6 @@ func RequestEventCode8(objRequest map[string]string, conn *grpc.ClientConn) *rpc
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -709,7 +685,6 @@ func RequestEventCode9(objRequest map[string]string, conn *grpc.ClientConn) *rpc
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -731,7 +706,6 @@ func RequestEventCode10(objRequest map[string]string, conn *grpc.ClientConn) *rp
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -753,7 +727,6 @@ func RequestEventCode11(objRequest map[string]string, conn *grpc.ClientConn) *rp
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -775,7 +748,6 @@ func RequestEventCode12(objRequest map[string]string, conn *grpc.ClientConn) *rp
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -797,7 +769,6 @@ func RequestEventCode13(objRequest map[string]string, conn *grpc.ClientConn) *rp
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -821,7 +792,6 @@ func RequestEventCode14(objRequest map[string]string, conn *grpc.ClientConn) *rp
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -842,7 +812,6 @@ func RequestNetworkAdapter(objRequest map[string]string, conn *grpc.ClientConn) 
 
 	// If error occurs, ResultInfo is error message and request is failure
 	if err != nil {
-		WriteAppLogError(err)
 		return &rpc.ResponseResult{
 			ResultInfo: "Error occurs: " + err.Error(),
 			Result:     false,
@@ -936,7 +905,5 @@ func HandleResult(responseResult *rpc.ResponseResult, objRequest map[string]stri
 	err := WriteMapString(resultLogPath, objRequest)
 	if err != nil {
 		WriteAppLogError(err)
-	} else {
-		WriteAppLogInfo("Success writes new response result to result file")
 	}
 }
