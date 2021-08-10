@@ -280,7 +280,7 @@ func HandleWindowsConn(conn net.Conn) {
 				if err := WriteSliceMapString(agentsConfPath, sliceAgentConfig); err != nil {
 					WriteAppLogError(err)
 				} else {
-					WriteAppLogInfo("Success changes agent config " + computerName + "to file")
+					WriteAppLogInfo("Success changes agent config " + computerName + " to file")
 				}
 			}
 			agentExist = true
@@ -294,7 +294,7 @@ func HandleWindowsConn(conn net.Conn) {
 		if err := WriteMapString(agentsConfPath, agentConfig); err != nil {
 			WriteAppLogError(err)
 		} else {
-			WriteAppLogInfo("Success adds agent config " + computerName + "to file")
+			WriteAppLogInfo("Success adds agent config " + computerName + " to file")
 		}
 	}
 
@@ -326,8 +326,8 @@ func HandleSplunkConn(conn net.Conn) {
 		logMapInterface := ConvertJsonToInterface(jsonString)
 
 		// if the key "Rule Action" exists, this log is sent to update rules.
-		if _, ok := logMapInterface["Rule Action"]; ok {
-			if err := HandleRule(logMapInterface); err != nil {
+		if _, ok := logMapInterface["Action Rule"]; ok {
+			if err := HandleRule(jsonString); err != nil {
 				WriteAppLogError(err)
 			}
 			conn.Close()
@@ -372,10 +372,13 @@ func HandleSplunkConn(conn net.Conn) {
 // and update the current slice rules.
 // In case "Rule Action" equal "add", We will add a new rule in the rules file
 // and update the current slice rules.
-func HandleRule(ruleSent map[string]interface{}) error {
+func HandleRule(ruleString string) error {
 
-	ruleAction := fmt.Sprintf("%v", ruleSent["Rule Action"])
-	delete(ruleSent, "Rule Action") // delete the key "Rule action"
+	ruleString = strings.Replace(ruleString, "\"{", "{", -1)
+	ruleString = strings.Replace(ruleString, "}\"", "}", -1)
+	ruleInterface := ConvertJsonToInterface(ruleString)
+	ruleAction := fmt.Sprintf("%v", ruleInterface["Action Rule"])
+	delete(ruleInterface, "Action Rule") // delete the key "Rule action"
 
 	switch ruleAction {
 	case "delete":
@@ -384,12 +387,12 @@ func HandleRule(ruleSent map[string]interface{}) error {
 
 			// map[string]string of data of rule is used to compare field of two data
 			data1 := ConvertInterfaceToString(rule["Data"].(map[string]interface{}))
-			data2 := ConvertInterfaceToString(ruleSent["Data"].(map[string]interface{}))
+			data2 := ConvertInterfaceToString(ruleInterface["Data"].(map[string]interface{}))
 
 			// If all fields of rulesent and rule are equal, we delete the rule at the
 			// index position and update the changes to the rules file and rules slice.
-			if rule["Type"] == ruleSent["Type"] && rule["Message"] == ruleSent["Message"] &&
-				rule["Action"] == ruleSent["Action"] && CheckMapEqual(data1, data2) {
+			if rule["Type"] == ruleInterface["Type"] && rule["Message"] == ruleInterface["Message"] &&
+				rule["Action"] == ruleInterface["Action"] && CheckMapEqual(data1, data2) {
 
 				// // Remove the element at index from slice.
 				copy(rules[index:], rules[index+1:]) // Shift rules[index+1:] left one index
@@ -406,8 +409,10 @@ func HandleRule(ruleSent map[string]interface{}) error {
 
 	case "add":
 
-		// add a new rule in the rules file
-		if err := WriteMapInterface(ruleFilePath, ruleSent); err != nil {
+		// add a new rule in the rules file and slice rule
+
+		rules = append(rules, ruleInterface)
+		if err := WriteMapInterface(ruleFilePath, ruleInterface); err != nil {
 			return err
 		}
 	}

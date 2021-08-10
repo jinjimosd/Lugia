@@ -70,70 +70,46 @@ func ReadSliceMapString(filePath string) []map[string]string {
 // in the file line by line. Here will delete the old data and replace it with new data.
 func WriteSliceMapString(filePath string, sliceMapString []map[string]string) error {
 
-	// Delete old file
-	if err := os.Remove(filePath); err != nil {
-		return err
-	}
+	// slice data to store all json byte
+	data := make([]byte, 0)
 
-	// create new file to stores data
-	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		return err
-	}
-	writer := bufio.NewWriter(file)
+	file, _ := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
 
-	// converts all elements in the slice into bytes and stores them in
-	// the file line by line
+	// converts all elements in the slice into bytes and them to slice data
 	for _, mapString := range sliceMapString {
-
-		// encode map[string]string to json bytes
-		jsonBytes, err := json.Marshal(mapString)
+		jsonBytes, err := json.Marshal(mapString) // encode map to json bytes
 		if err != nil {
 			return err
 		}
-
-		// store a new line json bytes to file
-		if _, err = writer.Write(append(jsonBytes, 10)); err != nil {
-			return err
-		}
+		jsonBytes = append(jsonBytes, 10)
+		data = append(data, jsonBytes...)
 	}
-	writer.Flush()
+
+	file.Write(data)
 	file.Close()
 	return nil
 }
 
 // The function converts all elements in the sliceMapInterface{} into bytes and stores them
-// in the file line by line. Here will delete the old data and replace it with new data.
+// in the file. Here will delete the old data and replace it with new data.
 func WriteSliceMapInterface(filePath string, sliceMapInterface []map[string]interface{}) error {
 
-	// Delete old file
-	if err := os.Remove(filePath); err != nil {
-		return err
-	}
+	// slice data to store all json byte
+	data := make([]byte, 0)
 
-	// create new file to stores data
-	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		return err
-	}
-	writer := bufio.NewWriter(file)
+	file, _ := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
 
-	// converts all elements in the slice into bytes and stores them in
-	// the file line by line
-	for _, mapString := range sliceMapInterface {
-
-		// encode map[string]interface{} to json bytes
-		jsonBytes, err := json.Marshal(mapString)
+	// converts all elements in the slice into bytes and them to slice data
+	for _, mapInterface := range sliceMapInterface {
+		jsonBytes, err := json.Marshal(mapInterface) // encode map to json bytes
 		if err != nil {
 			return err
 		}
-
-		// store a new line json bytes to file
-		if _, err = writer.Write(append(jsonBytes, 10)); err != nil {
-			return err
-		}
+		jsonBytes = append(jsonBytes, 10)
+		data = append(data, jsonBytes...)
 	}
-	writer.Flush()
+
+	file.Write(data)
 	file.Close()
 	return nil
 }
@@ -146,7 +122,6 @@ func WriteMapString(filePath string, mapString map[string]string) error {
 	if err != nil {
 		return err
 	}
-	writer := bufio.NewWriter(file)
 
 	// encode map[string]string to json bytes
 	jsonBytes, err := json.Marshal(mapString)
@@ -154,36 +129,27 @@ func WriteMapString(filePath string, mapString map[string]string) error {
 		return err
 	}
 
-	// store a new line json bytes to file
-	if _, err = writer.Write(append(jsonBytes, 10)); err != nil {
-		return err
-	}
-	writer.Flush()
+	file.Write(append(jsonBytes, 10))
 	file.Close()
 	return nil
 }
 
 // The function converts a map[string]interface{} into bytes and adds a new line to file.
-func WriteMapInterface(filePath string, mapString map[string]interface{}) error {
+func WriteMapInterface(filePath string, mapInterface map[string]interface{}) error {
 
 	// open file to add a new line
 	file, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
-	writer := bufio.NewWriter(file)
 
 	// encode map[string]interface{} to json bytes
-	jsonBytes, err := json.Marshal(mapString)
+	jsonBytes, err := json.Marshal(mapInterface)
 	if err != nil {
 		return err
 	}
 
-	// store a new line json bytes to file
-	if _, err = writer.Write(append(jsonBytes, 10)); err != nil {
-		return err
-	}
-	writer.Flush()
+	file.Write(append(jsonBytes, 10))
 	file.Close()
 	return nil
 }
