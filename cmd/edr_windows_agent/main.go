@@ -43,10 +43,10 @@ func (p *program) run() error {
 
 	logger.Infof("Lugia agent is running %v.", service.Platform())
 
-	// // Connect to EDR server
-	// if err := agent.RunSocketDial(); err != nil {
-	// 	log.Fatal(err)
-	// }
+	// Connect to EDR server
+	if err := agent.RunSocketDial(); err != nil {
+		log.Fatal(err)
+	}
 
 	// Create new gRPC server and initialize a gRPC service object
 	grpcServer := grpc.NewServer()
