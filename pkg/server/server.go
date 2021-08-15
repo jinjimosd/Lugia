@@ -25,7 +25,6 @@ import (
 	"bufio"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -374,8 +373,11 @@ func HandleSplunkConn(conn net.Conn) {
 // and update the current slice rules.
 func HandleRule(ruleString string) error {
 
+	// format,
 	ruleString = strings.Replace(ruleString, "\"{", "{", -1)
 	ruleString = strings.Replace(ruleString, "}\"", "}", -1)
+	ruleString = strings.Replace(ruleString, "\\\"", "\"", -1)
+
 	ruleInterface := ConvertJsonToInterface(ruleString)
 	ruleAction := fmt.Sprintf("%v", ruleInterface["Action Rule"])
 	delete(ruleInterface, "Action Rule") // delete the key "Rule action"
@@ -428,22 +430,8 @@ func HandleRespone(clientConn *grpc.ClientConn, objRequest map[string]string) {
 
 	// send request base on "Action" value
 	if objRequest["Action"] == "getfile" { // download file from agent
-		err := RequestGetFile(objRequest, clientConn)
-
-		// set "Result", "ResultInfo", "ResultTime" to write result log.
-		// if request have error, set log result is Falure and ResultInfor
-		// is error message, otherwise set log result is Success
-		if err != nil {
-			objRequest["Result"] = "Fail"
-			objRequest["ResultInfo"] = err.Error()
-		} else {
-			objRequest["Result"] = "Success"
-			objRequest["ResultInfo"] = "Download file successfully"
-		}
-		objRequest["ResultTime"] = FormatCurrentDateMilisecond()
-		if err := WriteMapString(resultLogPath, objRequest); err != nil {
-			WriteAppLogError(err)
-		}
+		resultFile := RequestGetFile(objRequest, clientConn)
+		HandleResult(resultFile, objRequest)
 
 		// disable network adapter
 	} else if objRequest["Action"] == "disable" || objRequest["Action"] == "enable" {
@@ -485,6 +473,12 @@ func HandleRespone(clientConn *grpc.ClientConn, objRequest map[string]string) {
 		case "14":
 			resultEvent14 := RequestEventCode14(objRequest, clientConn)
 			HandleResult(resultEvent14, objRequest)
+		default:
+			resultDefault := &rpc.ResponseResult{
+				ResultInfo: "Error: Not support for EventCode" + objRequest["EventCode"],
+				Result:     false,
+			}
+			HandleResult(resultDefault, objRequest)
 		}
 	}
 }
@@ -828,7 +822,7 @@ func RequestNetworkAdapter(objRequest map[string]string, conn *grpc.ClientConn) 
 // This function sends the request through function client.ManagerGetFile()
 // to AgentGRPC Server side and obtains the FileDatas available within the
 // given FileInfo. Results are streamed rather than returned at once.
-func RequestGetFile(objRequest map[string]string, grpcClient *grpc.ClientConn) error {
+func RequestGetFile(objRequest map[string]string, grpcClient *grpc.ClientConn) *rpc.ResponseResult {
 
 	var filePath string
 	eventCode := objRequest["EventCode"]
@@ -842,7 +836,10 @@ func RequestGetFile(objRequest map[string]string, grpcClient *grpc.ClientConn) e
 	case "11":
 		filePath = objRequest["TargetFilename"]
 	default: // Other eventcodes are not support
-		return errors.New("Error: Action get file is not support for EventCode" + eventCode)
+		return &rpc.ResponseResult{
+			ResultInfo: "Error: Action get file is not support for EventCode" + eventCode,
+			Result:     false,
+		}
 	}
 	fileInfo := &rpc.FileInfo{
 		FilePath: filePath,
@@ -853,7 +850,10 @@ func RequestGetFile(objRequest map[string]string, grpcClient *grpc.ClientConn) e
 	// a client stream object. Results are streamed rather than returned at once
 	stream, err := client.ManagerGetFile(context.Background(), fileInfo)
 	if err != nil {
-		return err
+		return &rpc.ResponseResult{
+			ResultInfo: "Error: " + err.Error(),
+			Result:     false,
+		}
 	}
 
 	// Get name of file
@@ -862,14 +862,20 @@ func RequestGetFile(objRequest map[string]string, grpcClient *grpc.ClientConn) e
 	// Check directory to save file. If directory is not exist, create dir
 	dirPath, err := CreateDir(parentDirPath, objRequest["ComputerName"])
 	if err != nil {
-		return err
+		return &rpc.ResponseResult{
+			ResultInfo: "Error: " + err.Error(),
+			Result:     false,
+		}
 	}
 
 	// File path to write data from client stream.
 	fileSave := dirPath + "/" + FormatCurrentDate() + fileName
 	f, err := os.Create(fileSave)
 	if err != nil {
-		return err
+		return &rpc.ResponseResult{
+			ResultInfo: "Error: " + err.Error(),
+			Result:     false,
+		}
 	}
 	defer f.Close()
 
@@ -882,14 +888,24 @@ func RequestGetFile(objRequest map[string]string, grpcClient *grpc.ClientConn) e
 			break
 		}
 		if err != nil { // return error
-			return err
+			return &rpc.ResponseResult{
+				ResultInfo: "Error: " + err.Error(),
+				Result:     false,
+			}
 		}
 		_, err = f.Write(chunkData.FileChunk)
 		if err != nil {
-			return err
+			return &rpc.ResponseResult{
+				ResultInfo: "Error: " + err.Error(),
+				Result:     false,
+			}
 		}
 	}
-	return nil
+
+	return &rpc.ResponseResult{
+		ResultInfo: "Download file " + fileName + " successfully",
+		Result:     true,
+	}
 }
 
 // This function combines result and writes result log to log file
