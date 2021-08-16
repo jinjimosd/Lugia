@@ -7,6 +7,7 @@ mkdir /opt/lugia
 
 cp -r ./configs /opt/lugia
 cp lugia /opt/lugia
+chmod +x /opt/lugia/lugia
 
 touch /opt/lugia/configs/agents.conf
 

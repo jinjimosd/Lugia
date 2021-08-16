@@ -261,21 +261,10 @@ func HandleWindowsConn(conn net.Conn) {
 	for index, agent := range sliceAgentConfig {
 		if agent["ComputerName"] == computerName {
 
-			// If ComputerName already exists, but host or port is change, delete
-			// old config and add the changed config to the slice.
+			// If ComputerName already exists, but host or port is change, update old config
 			if agent["AgentHost"] != agentHost || agent["AgentPort"] != agentPort {
-				lenSlice := len(sliceAgentConfig)
-
-				// Remove the element at index from sliceAgentConfig:
-				// - Copy last element to index i
-				// - Erase last element (write nil value)
-				// - Truncate sliceAgentConfig
-				sliceAgentConfig[index] = sliceAgentConfig[lenSlice-1]
-				sliceAgentConfig[lenSlice-1] = nil
-				sliceAgentConfig = sliceAgentConfig[:lenSlice-1]
-
-				// change config to the slice and change all config file
-				sliceAgentConfig = append(sliceAgentConfig, agentConfig)
+				sliceAgentConfig[index]["AgentHost"] = agentHost
+				sliceAgentConfig[index]["AgentPort"] = agentPort
 				if err := WriteSliceMapString(agentsConfPath, sliceAgentConfig); err != nil {
 					WriteAppLogError(err)
 				} else {

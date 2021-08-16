@@ -115,12 +115,9 @@ sc.exe start lugiaagent
 ```
 ## ⛏️ Changelog <a name = "Changelog">Changelog</a>
 
-- Edit rule file error format
-- Edit download file message success, message error
-- Edit HandleRule func to format rule sent from Splunk
-- Edit Default message func Handle response
-- Edit file lugia.service
-- Edit file install.sh
+- Update HandleWindows func
+- Update install.sh
+- Update file rule
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
