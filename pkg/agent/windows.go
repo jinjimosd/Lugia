@@ -379,7 +379,7 @@ func SplitKeyPathName(targetObject string) (string, string, string) {
 	// Path of key is string after concatenate the remaining elements of
 	// the slice after removing the first and last elements
 	path := strings.Join(split[1:len(split)-1], "\\")
-	return keyStr, name, path
+	return keyStr, path, name
 }
 
 // This function splits target object (Registry Path) to key string, path

@@ -1,4 +1,4 @@
-# EDR Server
+# Lugia Server
 
 ## Prerequisites
 Before you continue, ensure you meet the following requirements:
@@ -18,7 +18,7 @@ Before you continue, ensure you meet the following requirements:
 tar xvzf splunkforwarder-<…>-Linux-x86_64.tgz -C /opt
 ```
 
-## Install EDR Server
+## Install Lugia Server
 - Download source code from github https://github.com/jinjimosd/Lugia.git
 - Create directory configs and file edrserver.conf
 - Run install.sh file as sudo
@@ -26,7 +26,7 @@ tar xvzf splunkforwarder-<…>-Linux-x86_64.tgz -C /opt
 git clone https://github.com/jinjimosd/Lugia.git
 cd Lugia
 mkdir configs
-vim configs/edrserver.conf
+vim configs/servers.conf
 
 {
   "ServerConfig": [
@@ -37,7 +37,7 @@ vim configs/edrserver.conf
       "AppLogPath":"./log/applog.txt",
       "AgentsConfPath":"./configs/agents.conf",
       "SplunkHost":"<Splunk server host>",
-      "ServerHost":"<EDR server host>",
+      "ServerHost":"<Lugia server host>",
       "ServerPort":"10000"
     }
   ]
@@ -89,7 +89,7 @@ sudo systemctl start lugia.services
 sudo /opt/splunkforwarder/bin/splunk start
 ```
 
-# Installing EDR agent.
+# Installing Lugia agent.
 - Download source code from github https://github.com/jinjimosd/Lugia.git
 - Create windowsagent.conf and add config.
 
@@ -98,7 +98,7 @@ sudo /opt/splunkforwarder/bin/splunk start
   "AgentConfig": [
     {
       "AdapterInternet":"<Name Of Network Adapter>",
-      "ServerHost":"<EDR Server Host>",
+      "ServerHost":"<Lugia Server Host>",
       "ServerPort":"10000",
       "AgentHost":"<Agent Host>",
       "AgentPort":"1234"
