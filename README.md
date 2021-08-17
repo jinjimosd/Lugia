@@ -20,13 +20,13 @@ tar xvzf splunkforwarder-<…>-Linux-x86_64.tgz -C /opt
 
 ## Install Lugia Server
 - Download source code from github https://github.com/jinjimosd/Lugia.git
-- Create directory configs and file edrserver.conf
+- Create directory configs and file server.conf
 - Run install.sh file as sudo
 ```
 git clone https://github.com/jinjimosd/Lugia.git
 cd Lugia
 mkdir configs
-vim configs/servers.conf
+vim configs/server.conf
 
 {
   "ServerConfig": [

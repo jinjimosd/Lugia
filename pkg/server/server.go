@@ -10,7 +10,7 @@
  *
  * Summary of File:
  *
- * 	This file contains code that is executed by the EDR server.
+ * 	This file contains code that is executed by the Lugia server.
  * 	Functions:
  * 	Allowing the server to read the rule, add the rule from the splunk server.
  * 	Getting log from Splunk server.
@@ -38,7 +38,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-const CONFIG_PATH = "./configs/edrserver.conf"
+const CONFIG_PATH = "./configs/server.conf"
 
 // Variables use for multiple func
 var (
@@ -54,9 +54,9 @@ var (
 	agentsConfPath string
 	// Host of splunk server
 	splunkHost string
-	// Host for EDR Server
+	// Host for Lugia Server
 	serverHost string
-	// Port for EDR Server
+	// Port for Lugia Server
 	serverPort string
 	// Rules are used to automatically respond
 	rules []map[string]interface{}
@@ -137,10 +137,10 @@ func WriteAppLogInfo(args ...interface{}) {
 
 	hostname, err := os.Hostname()
 
-	// If get hostname is error, set default hostname: EDRServer
+	// If get hostname is error, set default hostname: LugiaServer
 	if err != nil {
-		fmt.Println("Get Hostname Error. Default hostname: EDRServer")
-		hostname = "EDRServer"
+		fmt.Println("Get Hostname Error. Default hostname: LugiaServer")
+		hostname = "LugiaServer"
 	}
 
 	// creates an entry from the standard logger and adds hostname
@@ -155,10 +155,10 @@ func WriteAppLogError(args ...interface{}) {
 
 	hostname, err := os.Hostname()
 
-	// If get hostname is error, set default hostname: EDRServer
+	// If get hostname is error, set default hostname: LugiaServer
 	if err != nil {
-		fmt.Println("Get Hostname Error. Default hostname: EDRServer")
-		hostname = "EDRServer"
+		fmt.Println("Get Hostname Error. Default hostname: LugiaServer")
+		hostname = "LugiaServer"
 	}
 
 	// creates an entry from the standard logger and adds hostname
@@ -188,7 +188,7 @@ func CreateGrpcDial() {
 	}
 }
 
-// This function starts EDR Service's server
+// This function starts Lugia Service's server
 func StartServer() {
 
 	serverAdress := serverHost + ":" + serverPort
@@ -233,7 +233,7 @@ func StartServer() {
 }
 
 // This function is used to handles incoming request from Windows agent.
-// After receiving agent's config, EDR server creates connection that used
+// After receiving agent's config, Lugia server creates connection that used
 // remote and send request to agent server.
 // If the agent's ComputerName already exists in the Config file, we check
 // to see if the agent's host and port have been changed. If it changes, we
