@@ -115,9 +115,8 @@ sc.exe start lugiaagent
 ```
 ## ⛏️ Changelog <a name = "Changelog">Changelog</a>
 
-- Update HandleWindows func
-- Update install.sh
-- Update file rule
+- Update name cmd
+- Update delete EventCode7
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 

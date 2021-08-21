@@ -297,7 +297,7 @@ func (*AgentGRPCService) ManagerEventCode7(
 			resultInfo = "Success kills ProcessId " + pid
 		}
 	// In this case, the agent deletes the created file
-	case "detele":
+	case "delete":
 		if err := os.Remove(filePath); err != nil {
 			resultInfo = "Error deletes file " + filePath + ": " + err.Error()
 			result = false

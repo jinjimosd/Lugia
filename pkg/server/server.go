@@ -309,6 +309,9 @@ func HandleSplunkConn(conn net.Conn) {
 	for {
 		// receive a message from Windows agent
 		jsonString, _ := bufio.NewReader(conn).ReadString('\n')
+		if jsonString == "" {
+			break
+		}
 
 		// convert string json to map interface
 		logMapInterface := ConvertJsonToInterface(jsonString)
@@ -318,8 +321,6 @@ func HandleSplunkConn(conn net.Conn) {
 			if err := HandleRule(jsonString); err != nil {
 				WriteAppLogError(err)
 			}
-			conn.Close()
-			break
 		}
 
 		// convert string json to map string
@@ -334,9 +335,6 @@ func HandleSplunkConn(conn net.Conn) {
 			// ComputerName of the received message
 			connRequest := mapClientConns[computerName]
 			HandleRespone(connRequest, logMapString)
-
-			conn.Close()
-			break
 
 			//If not, compare the rule
 		} else {
