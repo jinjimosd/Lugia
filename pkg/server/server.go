@@ -321,6 +321,7 @@ func HandleSplunkConn(conn net.Conn) {
 			if err := HandleRule(jsonString); err != nil {
 				WriteAppLogError(err)
 			}
+			break
 		}
 
 		// convert string json to map string
@@ -335,7 +336,7 @@ func HandleSplunkConn(conn net.Conn) {
 			// ComputerName of the received message
 			connRequest := mapClientConns[computerName]
 			HandleRespone(connRequest, logMapString)
-
+			break
 			//If not, compare the rule
 		} else {
 

@@ -1,3 +1,2 @@
-{"Action":"kill","Data":{"EventCode":"1","Image":"cmd.exe$"},"Message":"Detect Process Create","Type":"Process"}
 {"Action":"delete","Data":{"EventCode":"13","EventType":"SetValue","TargetObject":"(?mi)Software[//\\\\]{0,2}Microsoft[//\\\\]{0,2}Windows[//\\\\]{0,2}CurrentVersion[//\\\\]{0,2}Run"},"Message":"Create key autorun","Type":"Registry"}
-{"Action":"suspend","Data":{"EventCode":"1","Image":"calc.exe$"},"Message":"Suspend test","Type":"Process"}
+{"Action":"kill","Data":{"CommandLine":"ping","EventCode":"1","ParentImage":"cmd.exe$"},"Message":"Detect Process Create","Type":"Process"}

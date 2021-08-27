@@ -1,0 +1,92 @@
+<form theme="dark">
+  <label>Network Connection Drilldown</label>
+  <fieldset submitButton="true">
+    <input type="text" token="src_ip">
+      <label>Source IP</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="dst_ip">
+      <label>Destination IP</label>
+      <default>*</default>
+      <prefix>"</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="time" token="timepicker">
+      <label>Time span</label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <viz type="sankey_diagram_app.sankey_diagram">
+        <search>
+          <query>`sysmon` src_ip=$src_ip$ dst_ip=$dst_ip$ |  stats count by src_ip,dst_ip
+| table src_ip, dst_ip, count</query>
+          <earliest>$timepicker.earliest$</earliest>
+          <latest>$timepicker.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">514</option>
+        <option name="refresh.display">preview</option>
+      </viz>
+    </panel>
+    <panel>
+      <table>
+        <search>
+          <query>`sysmon` src_ip=$src_ip$ dst_ip=$dst_ip$ |  stats count by src_ip,dst_ip
+| table src_ip, dst_ip, count</query>
+          <earliest>$timepicker.earliest$</earliest>
+          <latest>$timepicker.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">14</option>
+        <option name="dataOverlayMode">highlow</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">true</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>`sysmon` src_ip=$src_ip$ dst_ip=$dst_ip$
+| rename host_fqdn AS host
+| table _time  event_description host user_name process_path process_id process_guid src_ip dst_ip dst_port src_host_name dst_host_name</query>
+          <earliest>$timepicker.earliest$</earliest>
+          <latest>$timepicker.latest$</latest>
+        </search>
+        <option name="count">6</option>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">preview</option>
+        <drilldown>
+         
+          <condition field="src_ip">
+            <link target="_blank">https://censys.io/ipv4/$row.src_ip$</link>
+          </condition>
+          <condition field="dst_ip">
+            <link target="_blank">https://censys.io/ipv4/$row.dst_ip$</link>
+          </condition>
+          <condition field="host">
+            <link target="_blank">
+              <![CDATA[/app/ThreatHunting/computer_drilldown?form.computer=$row.host$&form.time_picker.earliest=$time_picker.earliest$&form.time_picker.latest=$time_picker.latest$]]>
+            </link>
+          </condition>
+          <condition field="process_guid">
+            <link target="_blank">
+              <![CDATA[/app/ThreatHunting/process_guid_drilldown?form.process_guid=$row.process_guid$&earliest=$earliest$&latest=$latest$]]>
+            </link>
+          </condition>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

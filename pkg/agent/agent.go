@@ -232,7 +232,7 @@ func (*AgentGRPCService) ManagerEventCode3(
 		}
 	// In this case, the agent blocks traffic initiated from external ip
 	// to local ip.
-	case "block inbound ip":
+	case "block_src_ip":
 		if err := BlockInboundIp(sIp); err != nil {
 			resultInfo = "Error blocks inbound ip " + sIp + ": " + err.Error()
 			result = false
@@ -241,7 +241,7 @@ func (*AgentGRPCService) ManagerEventCode3(
 		}
 	// In this case, the agent blocks traffic initiated from the local ip
 	// to external ip.
-	case "block outbound ip":
+	case "block_dst_ip":
 		if err := BlockOutboundIp(dIp); err != nil {
 			resultInfo = "Error blocks outbound ip " + dIp + ": " + err.Error()
 			result = false

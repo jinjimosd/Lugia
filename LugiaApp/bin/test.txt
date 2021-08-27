@@ -1,0 +1,56 @@
+{"EventCode": "11","Image": "code.exe$"}
+{"EventCode": "11","Image": "code.exe$"}
+{"EventCode": "11","Image": "code.exe$"}
+{"EventCode": "11","Image": "code.exe$"}
+{"EventCode": "13","Image": "code.exe$"}
+{"EventCode": "12","Image": "code.exe$"}
+{"EventCode": "12","Image": "code.exe$"}
+{"EventCode": "12","Image": "code.exe$"}
+{"EventCode": "12","Image": "code.exe$"}
+{"EventCode": "12","Image": "code.exe$"}
+{"EventCode": "10","Image": "code.exe$"}
+{EventCode:1
+{EventCode:13
+{EventCode:1
+{EventCode:12
+{EventCode:1
+{"EventCode": "10","Image": "C:\\User\\Admin\\code.exe$"}
+{EventCode:1
+{"EventCode":"12"
+{"EventCode":"12","Image":"code.exe$"}
+{"EventCode":"12","Image":"code.exe$"}
+{"EventCode":"13","EventType":"SetValue","TargetObject":"(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode":"12","Image":"code.exe$"}
+{"EventCode":"13","EventType":"SetValue","TargetObject":"(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode": "13","EventType": "SetValue","TargetObject": "(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode": "13","EventType": "SetValue","TargetObject": "(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode": "14","EventType": "SetValue","TargetObject": "(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode": "14","EventType": "SetValue","TargetObject": "(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode": "14","EventType": "SetValue","TargetObject": "(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode": "1","EventType": "SetValue","TargetObject": "(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode":"1","Image":"calc.exe$"}
+{"EventCode":"3","EventType":"SetValue","TargetObject":"(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode":"1","EventType":"SetValue","TargetObject":"(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode":"2","EventType":"SetValue","TargetObject":"(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode":"1","Image":"cmd.exe$"}
+$data$}
+$data1$}
+$data1$}
+$data1$}
+$data1$}
+$data1$}
+$data$}
+}
+}
+}
+}
+{"EventCode":"1","Image":"cmd.exe$"}
+{"EventCode":"1","Image":"calc.exe$"}
+{"EventCode":"1","Image":"ping.exe$"}
+{"EventCode":"1","Image":"ping.exe$"}
+{"EventCode":"1","Image":"calc.exe$"}
+{"EventCode":"13","EventType":"SetValue","TargetObject":"(?mi)Software[//\\]{0,2}Microsoft[//\\]{0,2}Windows[//\\]{0,2}CurrentVersion[//\\]{0,2}Run"}
+{"EventCode":"1","Image":"cmd.exe$"}
+{"CommandLine":"^ping  -t","EventCode":"1","ParentImage":"cmd.exe$"}
+{"EventCode":"13","EventType":"SetValue","TargetObject":"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"}
+{"CommandLine":"^ping  -t","EventCode":"1","ParentImage":"cmd.exe$"}
