@@ -126,12 +126,18 @@ sc.exe start lugiaagent
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@jinjimosd](https://github.com/kylelobo) - Code and update
+- [@jinjimosd](https://github.com/jinjimosd) - Code and update
 
 - The list of contributors who participated in this project.
 
+Mentor: Do Xuan Cho       
 1. Nguyen Huy Thanh       Gmail: ThanhNHHE130698@fpt.edu.vn
 2. Le Tuan Anh            Gmail: AnhLTHE130738@fpt.edu.vn
 3. Bui Loc Xuan Truong    Gmail: TruongBLXHE130204@fpt.edu.vn
 4. Nguyen Huy Hoang       Gmail: HoangNHHE131014@fpt.edu.vn
 5. Tran	Đam	Chi           Gmail: ChiTDSE05481@fpt.edu.vn
+
+## Reference
+- ionstorm | Sysmon Based EDR written in PowerShell: https://github.com/ion-storm/sysmon-edr
+- Olaf Hartong | sysmon-modular | A Sysmon configuration repository for everybody to customise: https://github.com/olafhartong/sysmon-modular
+- Olaf Hartong | ThreatHunting | A Splunk app mapped to MITRE ATT&CK to guide your threat hunts: https://github.com/olafhartong/ThreatHunting
