@@ -125,17 +125,7 @@ sc.exe start lugiaagent
 - [Protocol Buffer](https://developers.google.com/protocol-buffers) - Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data
 
 ## ✍️ Authors <a name = "authors"></a>
-
-- [@jinjimosd](https://github.com/jinjimosd) - Code and update
-
-- The list of contributors who participated in this project.
-
-Mentor: Do Xuan Cho       
-1. Nguyen Huy Thanh       Gmail: ThanhNHHE130698@fpt.edu.vn
-2. Le Tuan Anh            Gmail: AnhLTHE130738@fpt.edu.vn
-3. Bui Loc Xuan Truong    Gmail: TruongBLXHE130204@fpt.edu.vn
-4. Nguyen Huy Hoang       Gmail: HoangNHHE131014@fpt.edu.vn
-5. Tran	Đam	Chi           Gmail: ChiTDSE05481@fpt.edu.vn
+- Viettel Cyber Security
 
 ## Reference
 - ionstorm | Sysmon Based EDR written in PowerShell: https://github.com/ion-storm/sysmon-edr
