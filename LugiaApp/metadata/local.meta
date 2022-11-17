@@ -1,0 +1,143 @@
+[app/install/install_source_checksum]
+version = 8.2.0
+modtime = 1623755338.573313000
+
+[indexes/windows]
+owner = admin
+version = 8.2.0
+modtime = 1623757047.582444000
+
+[inputs/splunktcp%3A%2F%2F9997]
+owner = admin
+version = 8.2.0
+modtime = 1623757579.295203000
+
+[ui-prefs/search]
+version = 8.2.1
+modtime = 1629713466.450261000
+
+[views/mitre_attack_overview]
+version = 8.2.1
+modtime = 1629555991.699116000
+
+[views/threat_hunting_overview]
+version = 8.2.1
+modtime = 1629082653.820529000
+
+[savedsearches/%5BT1018%5D%20Remote%20System%20Discovery%20-%20Network]
+version = 8.2.0
+modtime = 1627037215.826573000
+
+[savedsearches/%5BT1018%5D%20Remote%20System%20Discovery%20-%20Process]
+version = 8.2.1
+modtime = 1627218515.943677000
+
+[nav/default]
+version = 8.2.1
+modtime = 1629367268.246551000
+
+[app/ui]
+version = 8.2.0
+modtime = 1624534517.193559000
+
+[app/launcher]
+version = 8.2.0
+modtime = 1624534517.195579000
+
+[app/package/check_for_updates]
+version = 8.2.0
+modtime = 1624534517.196295000
+
+[views/computer_drilldown]
+version = 8.2.1
+modtime = 1629102773.831623000
+
+[views/user_drilldown]
+version = 8.2.1
+modtime = 1627461931.392062000
+
+[views/network_connection_drilldown]
+version = 8.2.1
+modtime = 1628583438.706723000
+
+[indexes/threathunting]
+owner = admin
+version = 8.2.0
+modtime = 1627037146.707455000
+
+[views/file_create_drilldown]
+version = 8.2.1
+modtime = 1629198152.484362000
+
+[views/pipe_drilldown]
+version = 8.2.0
+modtime = 1627055203.889141000
+
+[views/dns_stacking]
+version = 8.2.0
+modtime = 1627055220.251250000
+
+[savedsearches/%5BT0000%5D%20Connections%20from%20Uncommon%20Locations]
+version = 8.2.0
+modtime = 1627096127.132483000
+
+[savedsearches/%5BT0000%5D%20Console%20History]
+version = 8.2.0
+modtime = 1627096138.745701000
+
+[savedsearches/%5BT0000%5D%20Named%20Pipes]
+version = 8.2.0
+modtime = 1627096144.990860000
+
+[savedsearches/%5BT0000%5D%20Named%20Pipes%20-%20CobaltStrike]
+version = 8.2.0
+modtime = 1627096211.268892000
+
+[savedsearches/%5BT1002%5D%20Data%20Compressed]
+version = 8.2.0
+modtime = 1627097007.044145000
+
+[savedsearches/%5BT1002%5D%20Data%20Compressed%20-%20Files]
+version = 8.2.0
+modtime = 1627097019.395455000
+
+[savedsearches/%5BT1138%5D%20Application%20Shimming%20-%20FileAccess]
+version = 8.2.1
+modtime = 1627160519.304591000
+
+[views/process_guid_drilldown]
+version = 8.2.1
+modtime = 1629166050.615210000
+
+[views/rare_process_chains]
+version = 8.2.1
+modtime = 1629192097.968073000
+
+[views/computer_investigator]
+version = 8.2.1
+modtime = 1627526067.295573000
+
+[savedsearches/%5BT1112%5D%20Modify%20Registry]
+version = 8.2.1
+modtime = 1627905895.829703000
+
+[savedsearches/%5BT1547.001%5D%20Registry%20Run%20Keys%20or%20Start%20Folder]
+version = 8.2.1
+modtime = 1627910244.403068000
+
+[indexes/ruleresponse]
+owner = admin
+version = 8.2.1
+modtime = 1628510939.198807000
+
+[indexes/testrule]
+owner = admin
+version = 8.2.1
+modtime = 1628523336.746981000
+
+[savedsearches/Telegram%20Alert]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1629301641.067768000

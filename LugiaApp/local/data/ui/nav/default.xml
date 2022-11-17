@@ -1,0 +1,12 @@
+<nav  search_view="search" >
+  <view name="threat_hunting_overview" default="yes" />           
+		  <view name="mitre_attack_overview"/> 		  
+        <view name="computer_drilldown"/>
+        <view name="process_guid_drilldown"/>  
+        <view name="file_create_drilldown"/>        
+	     <view name="network_connection_drilldown"/>          	           
+    	   <view name="rare_process_chains"/>
+  			<view name="rule_editor"/>
+            <view name="Action_Report"/> 
+   			<view name="search" />
+</nav>

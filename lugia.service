@@ -1,0 +1,17 @@
+[Unit]
+Description=Lugia Server systemd service.
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/lugia
+ExecStart=/opt/lugia/lugia
+ExecStop=/bin/kill -15 $MAINPID
+Restart=always
+# time to sleep before restarting a service
+RestartSec=1
+StartLimitInterval=0
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
